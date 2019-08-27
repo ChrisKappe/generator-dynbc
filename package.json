@@ -1,0 +1,27 @@
+{
+  "name": "generator-dynbc",
+  "version": "1.0.0",
+  "description": "Yeoman Generator for Dynamics 365 Business Central apps",
+  "keywords": ["yeoman-generator", "Business Central", "al"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dynasist/generator-dynbc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dynasist/generator-dynbc/issues"
+  },
+  "main": "app/index.js",
+  "homepage": "https://github.com/dynasist/generator-dynbc/blob/master/README.md",
+  "license": "MIT",
+  "author": {
+    "name": "Dynasist Solutions Kft.",
+    "url": "https://github.com/dynasist"
+  },
+  "dependencies": {
+    "uuid": "^3.3.3",
+    "yeoman-generator": "^4.0.1"
+  },
+  "files": [
+    "app"
+  ]
+}

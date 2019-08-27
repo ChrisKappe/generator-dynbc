@@ -1,0 +1,34 @@
+{
+  "id": "<%= testGuid %>",
+  "name": "<%= appname %> Tests",
+  "publisher": "<%= publisher %>",
+  "brief": "",
+  "description": "",
+  "version": "1.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "target":"Extension",
+  "showMyCode": true,  
+  "capabilities": [],
+  "features": ["TranslationFile"],
+  "dependencies": [
+    {
+      "appId": "<%= appGuid %>",
+      "name": "<%= appname %>",
+      "publisher": "<%= publisher %>",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "14.0.0.0",
+  "application": "14.0.0.0",
+  "test": "14.0.0.0",
+  "runtime": "3.0",
+  "idRange": {
+    "from": <%= testStartId %>,
+    "to": <%= testEndId %>
+  }
+}
