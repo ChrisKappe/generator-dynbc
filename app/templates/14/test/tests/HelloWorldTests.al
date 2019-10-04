@@ -3,7 +3,6 @@
 codeunit <%= firstTestCuId %> HelloWorldTests_<%= suffix %>
 {
     Subtype = Test;
-    TestPermissions = Disabled;
 
     var
         Assert: Codeunit Assert;

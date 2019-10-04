@@ -42,7 +42,14 @@ module.exports = class extends Generator {
             description: 'Publisher name'
         });
 
+        this.option('bcversion', {
+            type: Number,
+            required: false,
+            description: 'Business Central Main version'
+        });
+
         this.appname = this.appname.ucFirst();
+        this.bcversion = 'v15';
 
         this.option('skip-quiz', {
             type: Boolean,
@@ -65,6 +72,16 @@ module.exports = class extends Generator {
                 name: "name",
                 message: "App name",
                 default: `${this.options['name'] || this.appname}` // Default to current folder name
+            },
+            {
+                type: "list",
+                name: "bcversion",
+                choices: [
+                    { name: "v15.0 2019 October", value: 15 },
+                    { name: "v14.0 2019 April", value: 14 }
+                ],
+                message: "Business Central Main version",
+                default: `${this.options['bcversion'] || this.bcversion}` // Default to current folder name
             },
             {
                 type: "number",
@@ -108,6 +125,7 @@ module.exports = class extends Generator {
 
     writing() {
         this.appname = this.answers.name || this.options['name'];
+        this.bcversion = this.answers.bcversion || this.options['bcversion'];
         this.appFolderName = `${this.appname}App`;
         this.testFolderName = `${this.appname}Test`;
         this.suffix = this.answers.suffix || this.options.suffix || '';
@@ -115,7 +133,7 @@ module.exports = class extends Generator {
         this.appGuid = uuidv4();
         this.testGuid = uuidv4();
         this.startId = this.answers.startId || this.options.startId;
-        this.range = this.answers.range ||this.options.range;
+        this.range = this.answers.range || this.options.range;
         this.endId = this.startId + this.range - 1;
         if (this.endId < this.startId) {
             this.endId = this.startId + 10;
@@ -129,7 +147,7 @@ module.exports = class extends Generator {
         this.testSuiteName = this.answers.testSuiteName || 'DEFAULT';
 
         this.fs.copyTpl(
-            this.templatePath('app/app.json'),
+            this.templatePath(`${this.bcversion}/app/app.json`),
             this.destinationPath(`${this.appFolderName}/app.json`),
             {
                 appGuid: this.appGuid,
@@ -141,7 +159,7 @@ module.exports = class extends Generator {
         );
 
         this.fs.copyTpl(
-            this.templatePath('app/src/PageExt.HelloWorld.al'),
+            this.templatePath(`${this.bcversion}/app/src/PageExt.HelloWorld.al`),
             this.destinationPath(`${this.appFolderName}/src/PageExt.HelloWorld.al`),
             {
                 startId: this.startId,
@@ -151,17 +169,17 @@ module.exports = class extends Generator {
 
         if (this.testApp) {
             this.fs.copy(
-                this.templatePath('test/Scenarios/*'),
+                this.templatePath(`${this.bcversion}/test/Scenarios/*`),
                 this.destinationPath(path.join(this.testFolderName, 'Scenarios'))
             );
 
             this.fs.copy(
-                this.templatePath('test/tests/*'),
+                this.templatePath(`${this.bcversion}/test/tests/*`),
                 this.destinationPath(path.join(this.testFolderName, 'tests'))
             );
 
             this.fs.copyTpl(
-                this.templatePath('test/app.json'),
+                this.templatePath(`${this.bcversion}/test/app.json`),
                 this.destinationPath(`${this.testFolderName}/app.json`),
                 {
                     appGuid: this.appGuid,
@@ -174,7 +192,7 @@ module.exports = class extends Generator {
             );
 
             this.fs.copyTpl(
-                this.templatePath('test/src/TestSuiteInstaller.al'),
+                this.templatePath(`${this.bcversion}/test/src/TestSuiteInstaller.al`),
                 this.destinationPath(`${this.testFolderName}/src/TestSuiteInstaller.al`),
                 {
                     testSuiteName: this.testSuiteName,
@@ -185,27 +203,30 @@ module.exports = class extends Generator {
                 }
             );
 
-            this.fs.copyTpl(
-                this.templatePath('test/src/TestSuiteMgmt.al'),
-                this.destinationPath(`${this.testFolderName}/src/TestSuiteMgmt.al`),
-                {
-                    testStartId: this.testStartId,
-                    suffix: this.suffix
-                }
-            );
+            if (this.bcversion < 15) {
+                this.fs.copyTpl(
+                    this.templatePath(`${this.bcversion}/test/src/TestSuiteMgmt.al`),
+                    this.destinationPath(`${this.testFolderName}/src/TestSuiteMgmt.al`),
+                    {
+                        testStartId: this.testStartId,
+                        suffix: this.suffix
+                    }
+                );
+            }
 
             this.fs.copyTpl(
-                this.templatePath('test/tests/HelloWorldTests.al'),
+                this.templatePath(`${this.bcversion}/test/tests/HelloWorldTests.al`),
                 this.destinationPath(`${this.testFolderName}/tests/HelloWorldTests.al`),
                 {
                     firstTestCuId: this.firstTestCuId,
+                    testNextId: this.testNextId,
                     suffix: this.suffix
                 }
             );
         }
 
         this.fs.copyTpl(
-            this.templatePath('bc.code-workspace'),
+            this.templatePath(`${this.bcversion}/bc.code-workspace`),
             this.destinationPath(`${this.appname}.code-workspace`),
             {
                 appFolderName: this.appFolderName,

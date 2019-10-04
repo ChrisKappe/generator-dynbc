@@ -1,6 +1,6 @@
 {
   "name": "generator-dynbc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Yeoman Generator for Dynamics 365 Business Central apps",
   "keywords": ["yeoman-generator", "Business Central", "al"],
   "repository": {

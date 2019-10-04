@@ -19,6 +19,7 @@ Example code is based on this Hello World repository: https://dev.azure.com/busi
 * `--help,-h`: shows available commands and options
 * `--skip-quiz`: skips wizard to use specified options instead
 * `--start-id`: first Object ID of your range
+* `--bcversion`: Business Central main version number, 14 or 15
 * `--range`: number of Objects
 * `--suffix`: company suffix to be added to Object names
 * `--publisher`: publisher name
@@ -32,6 +33,7 @@ Example code is based on this Hello World repository: https://dev.azure.com/busi
 Wizard questions:
 ```
 ? App name -> MyNewApp
+? Business Central Main version -> v15.0 2019 October
 ? First Object ID -> 50000
 ? Number of Objects -> 10
 ? Publisher name -> My Company
@@ -55,7 +57,7 @@ Output:
 
 This mode automatically generates Unit Testing with "DEFAULT" Test Suite.
 
-`yo dynbc MyNewApp --start-id 50000 --range 10 --publisher "My Company" --suffix DBC --skip-quiz`
+`yo dynbc MyNewApp --bcversion 15 --start-id 50000 --range 10 --publisher "My Company" --suffix DBC --skip-quiz`
 
 Output:
 ```

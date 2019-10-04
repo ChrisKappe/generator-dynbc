@@ -1,3 +1,7 @@
+# This example script utilizes ATDD.TestScriptor PowerShell module to generate Unit Tests
+# More info: https://github.com/fluxxus-nl/ATDD.TestScriptor
+# Install-Module ATDD.TestScriptor 
+
 $Features = @()
 
 $Features +=
