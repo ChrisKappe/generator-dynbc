@@ -49,7 +49,7 @@ module.exports = class extends Generator {
         });
 
         this.appname = this.appname.ucFirst();
-        this.bcversion = 'v15';
+        this.bcversion = 16;
 
         this.option('skip-quiz', {
             type: Boolean,
@@ -77,6 +77,7 @@ module.exports = class extends Generator {
                 type: "list",
                 name: "bcversion",
                 choices: [
+                    { name: "v16.0 2020 April", value: 16 },
                     { name: "v15.0 2019 October", value: 15 },
                     { name: "v14.0 2019 April", value: 14 }
                 ],
@@ -225,12 +226,21 @@ module.exports = class extends Generator {
             );
         }
 
+        let testObjStr = `,
+        {
+            "path": "${this.testFolderName}"
+        }`;
+
+        if (!this.testApp) {
+            testObjStr = '';
+        }
+
         this.fs.copyTpl(
             this.templatePath(`${this.bcversion}/bc.code-workspace`),
             this.destinationPath(`${this.appname}.code-workspace`),
             {
                 appFolderName: this.appFolderName,
-                testFolderName: this.testFolderName
+                testFolder: testObjStr
             }
         );
     }
