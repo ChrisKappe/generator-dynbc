@@ -19,7 +19,7 @@ Example code is based on this Hello World repository: https://dev.azure.com/busi
 * `--help,-h`: shows available commands and options
 * `--skip-quiz`: skips wizard to use specified options instead
 * `--start-id`: first Object ID of your range
-* `--bcversion`: Business Central main version number, 14 or 15
+* `--bcversion`: Business Central main version number, 14, 15 or 16
 * `--range`: number of Objects
 * `--suffix`: company suffix to be added to Object names
 * `--publisher`: publisher name
@@ -33,7 +33,7 @@ Example code is based on this Hello World repository: https://dev.azure.com/busi
 Wizard questions:
 ```
 ? App name -> MyNewApp
-? Business Central Main version -> v15.0 2019 October
+? Business Central Main version -> v16.0 2020 April
 ? First Object ID -> 50000
 ? Number of Objects -> 10
 ? Publisher name -> My Company
